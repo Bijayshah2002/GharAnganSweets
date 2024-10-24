@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghar Angan Sweets - Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .menu-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #cart {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #cart-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+
+        #close-cart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cart" onclick="openCart()">0</div>
+
+    <div id="cart-modal">
+        <span id="close-cart" onclick="closeCart()">X</span>
+        <h2>Shopping Cart</h2>
+        <ul id="cart-details"></ul>
+        <p>Total Bill: $<span id="total-bill">0</span></p>
+    </div>
+
+    <div class="menu-item">
+        <h2>Item 1</h2>
+        <p>Price: $10</p>
+        <button onclick="addToCart('Item 1', 10)">Add to Cart</button>
+    </div>
+    <div class="menu-item">
+        <h2>Item 1</h2>
+        <p>Price: $20</p>
+        <button onclick="addToCart('Item 2', 20)">Add to Cart</button>
+    </div>
+    <div class="menu-item">
+        <h2>Item 1</h2>
+        <p>Price: $30</p>
+        <button onclick="addToCart('Item 3', 30)">Add to Cart</button>
+    </div>
+
+    <!-- Repeat similar structure for other menu items -->
+
+    <script>
+        let cartCount = 0;
+        let cartDetails = [];
+
+        function addToCart(item, price) {
+            cartCount++;
+            document.getElementById('cart').style.display = 'block';
+            document.getElementById('cart').textContent = cartCount;
+
+            cartDetails.push({ item, price });
+
+            updateCartDetails();
+        }
+
+        function updateCartDetails() {
+            let cartDetailsList = document.getElementById('cart-details');
+            let totalBillElement = document.getElementById('total-bill');
+            let totalBill = 0;
+
+            // Clear previous details
+            cartDetailsList.innerHTML = "";
+
+            // Update cart details
+            cartDetails.forEach(detail => {
+                let listItem = document.createElement('li');
+                listItem.textContent = `${detail.item} - $${detail.price}`;
+                cartDetailsList.appendChild(listItem);
+
+                totalBill += detail.price;
+            });
+
+            totalBillElement.textContent = totalBill.toFixed(2);
+        }
+
+        function openCart() {
+            document.getElementById('cart-modal').style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Menu</title>
+  <style>
+    /* Add your own styles here */
+    .menu-item {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .menu-item img {
+      max-width: 100px;
+      max-height: 100px;
+    }
+
+    .cart-icon {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    #cart-container {
+      display: none;
+      padding: 10px;
+      border: 1px solid #ddd;
+      margin-top: 10px;
+    }
+
+    #cart-items {
+      list-style: none;
+      padding: 0;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    #view-cart-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    #menu span{
+      font-size: 50px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Restaurant Menu</h1>
+
+  <div id="menu">
+    <!-- Menu items -->
+    <div class="menu-item" data-id="1">
+      <img src="feature-small-1.png" alt="Burger Image">
+      <div class="name">
+        <span>Burger</span>
+        <span>$10.00</span>
+      </div>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+    
+    <div class="menu-item" data-id="2">
+      <img src="feature-small-2.png" alt="Pasta Image">
+      <div class="name">
+        <span>Pasta</span>
+        <span>$12.00</span>
+      </div>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <!-- Repeat the above structure for other items -->
+
+  </div>
+
+  <div id="cart-icon" class="cart-icon" onclick="toggleCart()">
+    🛒<span id="cart-count">0</span>
+  </div>
+
+  <div id="cart-container">
+    <h2>Your Cart</h2>
+    <ul id="cart-items"></ul>
+    <p>Total: $<span id="cart-total">0.00</span></p>
+    <button onclick="checkout()">Checkout</button>
+  </div>
+
+  <button id="view-cart-btn" onclick="toggleCart()">View Cart</button>
+
+  <script>
+    // JavaScript code for handling cart functionality
+    let cartItems = [];
+
+    document.addEventListener('click', function (event) {
+      if (event.target.classList.contains('add-to-cart')) {
+        const menuItem = event.target.closest('.menu-item');
+        const itemId = menuItem.getAttribute('data-id');
+        const itemName = menuItem.querySelector('div span:first-child').innerText;
+        const itemPrice = parseFloat(menuItem.querySelector('div span:last-child').innerText.replace('$', ''));
+        
+        addToCart(itemId, itemName, itemPrice);
+      }
+    });
+
+    function addToCart(id, name, price) {
+      const existingItem = cartItems.find(item => item.id === id);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cartItems.push({ id, name, price, quantity: 1 });
+      }
+
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartElement = document.getElementById('cart-count');
+      const cartContainer = document.getElementById('cart-container');
+      const cartItemsElement = document.getElementById('cart-items');
+      const cartTotalElement = document.getElementById('cart-total');
+
+      cartElement.textContent = getTotalQuantity();
+
+      cartItemsElement.innerHTML = '';
+
+      if (cartItems.length === 0) {
+        cartContainer.style.display = 'none';
+      } else {
+        cartContainer.style.display = 'block';
+
+        cartItems.forEach(item => {
+          const li = document.createElement('li');
+          li.className = 'cart-item';
+          li.innerHTML = `${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`;
+          cartItemsElement.appendChild(li);
+        });
+
+        cartTotalElement.textContent = getTotalPrice().toFixed(2);
+      }
+    }
+
+    function toggleCart() {
+      const cartContainer = document.getElementById('cart-container');
+      if (cartContainer.style.display === 'none' || cartContainer.style.display === '') {
+        updateCart();
+      } else {
+        cartContainer.style.display = 'none';
+      }
+    }
+
+    function getTotalQuantity() {
+      return cartItems.reduce((total, item) => total + item.quantity, 0);
+    }
+
+    function getTotalPrice() {
+      return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    }
+
+    function checkout() {
+      alert(`Thank you for your order!\nTotal: $${getTotalPrice().toFixed(2)}`);
+      cartItems = [];
+      updateCart();
+    }
+  </script>
+
+</body>
+</html>

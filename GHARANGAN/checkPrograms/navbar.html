@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            font-family: sans-serif;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        .header{
+            position: fixed;
+            width:100%;
+            top:0;
+            left:0;
+            background-color: rgb(190, 195, 195);
+            padding:20px 80px;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: .3s;
+                   
+        }
+        .logo{
+            font-size: 30px;
+            text-decoration: none;
+            color: black;
+            font-weight: 600;
+        }
+        .navbar a{
+            font-size: 25px;
+            text-decoration: none;
+            color:black;
+            margin-left: 18px;
+            font-weight: 400;
+        }
+        .navbar a:hover{
+            font-size:30;
+            color:rgb(60, 103, 103);
+            font-weight: 700;
+            text-decoration: underline;
+        }
+        section{
+            min-height: 100vh;
+            display:flex;
+            justify-content: center;
+            align-items:center;
+            font-size: 20px;
+            font-weight: 800;
+            background-color: rgb(92, 90, 87);
+        }
+        section:nth-child(odd){
+            background-color: rgb(223, 130, 130);
+        }
+        section form fieldset{
+            border:2px solid rgb(39, 36, 36);
+            border-radius: 5px;
+            height:200px;
+            width:300px;
+            background-color: rgb(69, 82, 75);
+        }
+        /* .login{
+        height: 300px;
+        width:400px;
+        background-color: rgb(112, 112, 100);    
+        border:5px solid brown;
+        border-radius:10px;
+        } */
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo" ><a href="#">Logo</a></div>
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#Login">Login</a>
+            <a href="#register">Register</a>
+        </nav>
+
+    </div>
+    <section id="home">Home</section>
+    <section id="about">About</section>
+    <section id="contact">Contact</section>
+    <section id="Login"><div class="login">
+        <form action="">
+            <fieldset>
+            <legend>Login form</legend>
+        <div class="log">Username:<input type="text" name="" id=""></div>
+        <div class="pass">Password:<input type="text" ></div>
+        <button>Login</button>
+    </fieldset>
+    </form>
+    </div>
+    
+    
+    
+    
+    </section>
+    <section id="register">Register</section>
+</body>
+</html>

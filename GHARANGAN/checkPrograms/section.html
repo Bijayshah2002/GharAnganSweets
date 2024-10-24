@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <Style>
+        *{
+            margin: 0;
+            padding:0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+
+        }
+        body{
+            background-color: black;
+        }
+        .header{
+            position: fixed;
+            width:100%;
+            padding:15px 80px;
+            top:0;
+            left: 0;
+            background-color: rgb(47, 46, 48);
+            display:flex;
+            z-index: 100;
+            justify-content: space-between;
+            align-items: center;
+            
+        }
+        .logo{
+            font-size: 30px;
+            text-decoration: none;
+            color:azure;
+            font-weight: 600;
+            
+        }
+        .navbar a{
+             font-size: 25px;
+             text-decoration:none;
+             color:azure;
+             font-weight: 500;
+             margin-left:35px;
+             transition: .3s;
+        }
+        nav a:hover,
+        nav a.active{
+            color:aqua;
+        }
+        section{
+            color: bisque;
+            font-size: 60px;
+            min-height: 100vh;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            font-weight:700;
+        }
+        section:nth-child(even){
+            background-color:rgb(91, 95, 94) ;
+        }
+    </Style>
+</head>
+<body>
+    <div class="header">
+        <a href="#" class="logo">Logo</a>
+        <div class="nav">
+          <nav class="navbar">
+           <a href="#home">Home</a>
+           <a href="#about">About</a>
+           <a href="#portfolio">Portfolio</a>
+           <a href="#services">Services</a>
+           <a href="#contact">Contact</a>
+          </nav>
+        </div>
+    </div>
+    <section id="home">Home</section>
+    <section id="about">About</section>
+    <section id="portfolio">Portfolio</section>
+    <section id="services">Services</section>
+    <section id="contact">Contact</section>
+</body>
+</html>
